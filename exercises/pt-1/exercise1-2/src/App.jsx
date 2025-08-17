@@ -13,7 +13,7 @@ const Content = (props) => {
   return (
     <>
       {props.parts.map((part,i) => (
-        <Part part={part} ex={props.exercises1}/>
+        <Part part={part} ex={props.exercises[i]}/>
       ))}    
       {/* <Part part={props.parts[0]} ex={props.exercises1}/>
       <Part part={props.parts[1]} ex={props.exercises2}/>
@@ -32,7 +32,7 @@ const Part = (props) => {
 const Total = (props) => {
   return (
     <>
-      <p>Total exercises: {props.exercises1 + props.exercises3 + props.exercises2}</p>
+      <p>Total exercises: {props.exercises[0] + props.exercises[1] + props.exercises[2]}</p>
     </>
   )
 }
@@ -42,15 +42,13 @@ function App() {
   
   const course = 'Short Stacks AppDev';
   const parts = ['React Fundies', 'Using props to pass the data', 'State of a component'];
-  const exercises1 = 10;
-  const exercises2 = 7;
-  const exercises3 = 14;
+  const exercises = [10, 7, 14];
 
   return (
     <>
       <Header course={course}/>
-      <Content parts={parts} exercises1={exercises1} exercises2={exercises2} exercises3={exercises3}/>
-      <Total exercises1={exercises1} exercises2={exercises2} exercises3={exercises3}/>
+      <Content parts={parts} exercises={exercises}/>
+      <Total exercises={exercises}/>
     </>
   )
 }
