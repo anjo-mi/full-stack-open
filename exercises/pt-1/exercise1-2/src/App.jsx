@@ -9,11 +9,23 @@ const Header = (props) => {
   )
 }
 const Content = (props) => {
+  
   return (
     <>
-      <p>{props.parts[0]}: {props.exercises1}</p>
-      <p>{props.parts[1]}: {props.exercises2}</p>
-      <p>{props.parts[2]}: {props.exercises3}</p>
+      {props.parts.map((part,i) => (
+        <Part part={part} ex={props.exercises1}/>
+      ))}    
+      {/* <Part part={props.parts[0]} ex={props.exercises1}/>
+      <Part part={props.parts[1]} ex={props.exercises2}/>
+      <Part part={props.parts[2]} ex={props.exercises3}/> */}
+    </>
+  )
+}
+const Part = (props) => {
+  console.log(props)
+  return (
+    <>
+      <p>{props.part}: {props.ex}</p>
     </>
   )
 }
