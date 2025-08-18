@@ -4,7 +4,7 @@ import { useState } from 'react'
 const Header = (props) => {
   return (
     <>
-      <p>{props.course}</p>
+      <p>{props.course.name}</p>
     </>
   )
 }
@@ -17,7 +17,7 @@ const Content = (props) => {
 
   return (
     <>
-      {callParts(props.parts)}    
+      {callParts(props.course.parts)}    
       
     </>
   )
@@ -33,7 +33,7 @@ const Total = (props) => {
   return (
     <>
       <span>Total Exercises: </span>
-      {props.parts.reduce((a,el) => a + el.exercises, 0)}
+      {props.course.parts.reduce((a,el) => a + el.exercises, 0)}
     </>
   )
 }
@@ -41,26 +41,28 @@ const Total = (props) => {
 
 function App() {
   
-  const course = 'Short Stacks AppDev';
-  const part1 = {
-    name: 'Fundamentals of React',
-    exercises: 10
+  const course = {
+    name: 'Short Stacks AppDev',
+    parts: [
+      {
+        name: 'Fundamentals of React',
+        exercises: 10
+      },
+      {
+        name: 'Using props to pass data',
+        exercises: 7
+      },
+      {
+        name: 'State of a component',
+        exercises: 14
+      }
+    ]
   }
-  const part2 = {
-    name: 'Using props to pass data',
-    exercises: 7
-  }
-  const part3 = {
-    name: 'State of a component',
-    exercises: 14
-  }
-  const parts = [part1,part2,part3];
-
   return (
     <>
       <Header course={course}/>
-      <Content parts={parts} />
-      <Total parts={parts}/>
+      <Content course={course} />
+      <Total course={course}/>
     </>
   )
 }
