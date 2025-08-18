@@ -9,20 +9,20 @@ const Header = (props) => {
   )
 }
 const Content = (props) => {
-  
+  const callParts = (parts) => {
+    return parts.map((part,i) => (
+      <Part part={part.name} ex={part.exercises}/>
+    ))
+  }
+
   return (
     <>
-      {props.parts.map((part,i) => (
-        <Part part={part} ex={props.exercises[i]}/>
-      ))}    
-      {/* <Part part={props.parts[0]} ex={props.exercises1}/>
-      <Part part={props.parts[1]} ex={props.exercises2}/>
-      <Part part={props.parts[2]} ex={props.exercises3}/> */}
+      {callParts(props.parts)}    
+      
     </>
   )
 }
 const Part = (props) => {
-  console.log(props)
   return (
     <>
       <p>{props.part}: {props.ex}</p>
@@ -32,7 +32,8 @@ const Part = (props) => {
 const Total = (props) => {
   return (
     <>
-      <p>Total exercises: {props.exercises[0] + props.exercises[1] + props.exercises[2]}</p>
+      <span>Total Exercises: </span>
+      {props.parts.reduce((a,el) => a + el.exercises, 0)}
     </>
   )
 }
@@ -41,14 +42,25 @@ const Total = (props) => {
 function App() {
   
   const course = 'Short Stacks AppDev';
-  const parts = ['React Fundies', 'Using props to pass the data', 'State of a component'];
-  const exercises = [10, 7, 14];
+  const part1 = {
+    name: 'Fundamentals of React',
+    exercises: 10
+  }
+  const part2 = {
+    name: 'Using props to pass data',
+    exercises: 7
+  }
+  const part3 = {
+    name: 'State of a component',
+    exercises: 14
+  }
+  const parts = [part1,part2,part3];
 
   return (
     <>
       <Header course={course}/>
-      <Content parts={parts} exercises={exercises}/>
-      <Total exercises={exercises}/>
+      <Content parts={parts} />
+      <Total parts={parts}/>
     </>
   )
 }
