@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
-// import './App.css'
 
 
 const DisplayLink = ({src, cls, href, alt}) =>{
@@ -11,22 +10,14 @@ const DisplayLink = ({src, cls, href, alt}) =>{
     </a>
   )
 }
+const DisplayCounter = ({counter}) => <div>{counter}</div>;
 
-const DisplayCounter = ({counter}) => {
-  return (
-    <div>{counter}</div>
-  )
-}
-const DisplayButton = ({fn, txt}) => {
-  return (
-    <button onClick={fn}>{txt}</button>
-  )
-}
+const DisplayButton = ({fn, txt}) => <button onClick={fn}>{txt}</button>;
 
 function App() {
   const [counter, setCounter] = useState(0);
 
-  const handleClick = () => {
+  const addOne = () => {
     console.log(`counting from ${counter}!`);
     setCounter(counter + 1);
   }
@@ -34,15 +25,18 @@ function App() {
     console.log(`resetting from ${counter}!`);
     setCounter(0);
   }
+  const minusOne = () => {
+    console.log(`subtracting from ${counter}!`);
+    setCounter(counter-1);
+  }
   return (
     <>
       <DisplayLink src={viteLogo} cls="logo" alt="Vite Logo" href="https://vite.dev"/>
       <DisplayLink src={reactLogo} cls="logo react" alt="React Logo" href="https://react.dev"/>
       <DisplayCounter counter={counter} />
-      <DisplayButton fn={handleClick} txt="Count!!!" />
-      <DisplayButton fn={startOver} txt="Revert to Zero!!!" />
-      
-      
+      <DisplayButton fn={addOne} txt="Count!!!" />
+      <DisplayButton fn={minusOne} txt="Deduct!!!" />
+      <DisplayButton fn={startOver} txt="Revert to Zero!!!" />      
     </>
   )
 }
