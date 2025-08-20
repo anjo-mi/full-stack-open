@@ -3,38 +3,45 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 // import './App.css'
 
-const Hello = (props) => {
-  console.log(props);
+
+const DisplayLink = ({src, cls, href, alt}) =>{
   return (
-    <div>
-      <p>Greetings, {props.name}, your {props.age} year old ass is old af!!</p>
-    </div>
+    <a href={href} target="_blank">
+      <img src={src} className={cls} alt={alt} />
+    </a>
+  )
+}
+
+const DisplayCounter = ({counter}) => {
+  return (
+    <div>{counter}</div>
+  )
+}
+const DisplayButton = ({fn, txt}) => {
+  return (
+    <button onClick={fn}>{txt}</button>
   )
 }
 
 function App() {
-  const [count, setCount] = useState(0)
-  const name = 'poop'
-  const age = 45
+  const [counter, setCounter] = useState(0);
+
+  const handleClick = () => {
+    console.log(`counting from ${counter}!`);
+    setCounter(counter + 1);
+  }
+  const startOver = () => {
+    console.log(`resetting from ${counter}!`);
+    setCounter(0);
+  }
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Salutations!</h1>
-      <Hello name='Stevie' age={34}/>
-      <Hello name='Toddie' age={22}/>
-      <Hello name={name} age={age}/>
-      {/* <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-      </div>  */}
+      <DisplayLink src={viteLogo} cls="logo" alt="Vite Logo" href="https://vite.dev"/>
+      <DisplayLink src={reactLogo} cls="logo react" alt="React Logo" href="https://react.dev"/>
+      <DisplayCounter counter={counter} />
+      <DisplayButton fn={handleClick} txt="Count!!!" />
+      <DisplayButton fn={startOver} txt="Revert to Zero!!!" />
+      
       
     </>
   )
